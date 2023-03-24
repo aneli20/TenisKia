@@ -33,7 +33,6 @@
       <hr>
 
       <div class="container"> 
-        <h2 class="font-weight-bold text-center text-capitalize">DESTACADOS</h2>
         <hr>
         <div class="row" th:each="catalogo:${catalogos}">
           <div class="col-md-3">            
@@ -41,7 +40,7 @@
           </div>
           <div class="col-md-9">
             <h2 th:text="${catalogo.nombre}"></h2>
-            <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.nombre}"></span></h6>
+            <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.ventas.nombre}"></span></h6>
             <p th:text="${catalogo.descripcion}"></p>
             <p><a class="btn btn-secondary" th:href="@{/catalogos/detalle{id=${catalogo.id}}}" role="button">View details &raquo;</a></p>            
           </div>
@@ -52,16 +51,21 @@
             <p><a class="btn btn-secondary" th:href="@{/ventas/detalle{id=${venta.id}}}" role="button">View details &raquo;</a></p>            
           </div>
         </div>  
-        <div class="card" style="width: 18rem;">
+        <img src="images/jordan3.jpg" class="rounded float-start" alt="...">
+        <div class="card text-center">
+  <div class="card-header">
+    TenisKia
+  </div>
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">hola usuario</h5>
+    <p class="card-text">si quieres ingresar a la pagina oficial da en el boton azul en el de la parte de abajo .</p>
+    <a href="#" class="btn btn-primary">Ingresar</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
   </div>
 </div>
-<img src="images/jordan3.jpg" class="rounded float-start" alt="...">
+
 <img src="images/adidas3.jpg" class="rounded float-end" alt="...">
          <!-- /container -->
 
