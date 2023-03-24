@@ -12,27 +12,6 @@ import org.teniskia.entity.Catalogo;
 public class CatalogoServiceImp implements IntServiceCatalogos{
 	private List<Catalogo> catalogos = null;
 	
-	public CatalogoServiceImp () {
-		catalogos = new LinkedList<>();
-		
-		Catalogo c1 = new Catalogo();
-		Catalogo c2 = new Catalogo();
-		
-		c1.setId(1);
-		c1.setNombre("Nike");
-		c1.setDescripcion("Tenis de futbol");
-		c1.setPrecio(1150.0);
-		c1.setTalla(25.5);
-		
-		c2.setId(1);
-		c2.setNombre("Adidas");
-		c2.setDescripcion("Tenis de futbol");
-		c2.setPrecio(1250.0);
-		c2.setTalla(23.5);
-		
-		catalogos.add(c1);
-		catalogos.add(c2);
-	}
 	
 	@Override
 	public List<Catalogo> obtenerCatalogos(){

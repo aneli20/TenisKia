@@ -20,20 +20,20 @@ import org.teniskia.service.IntServiceCatalogos;
 @Controller
 public class CatalogosController {
 	@Autowired
-	private IntServiceCatalogos serviceCatalogo;
+	private IntServiceCatalogos serviceCatalogos;
 	
 	@GetMapping("/buscar")
 	public String modificarCa(@RequestParam("id") int idCatalogo, Model model) {
-		Catalogo catalogo = serviceCatalogo.buscarPorId(idCatalogo);
+		Catalogo catalogo = serviceCatalogos.buscarPorId(idCatalogo);
 		model.addAttribute("catalogo", catalogo);
 		return "catalogos/formCatalogo";
 	}
 	@PostMapping("/guardar")
 	public String guardar(Catalogo catalogo/*, RedirectAttributes model*/) {
-		//categoria.setId(serviceCategorias.obtenerCategorias().size()+1);
+		//catalogo.setId(serviceCategorias.obtenerCategorias().size()+1);
 		//serviceCategorias.guardar(catalogo);
 		/*categoria.setId(serviceCategorias.obtenerCategorias().size()+1);*/
-		serviceCatalogo.guardar(catalogo);
+		serviceCatalogos.guardar(catalogo);
 		return "redirect:/catalogos/index";
 		/*if(categoria.getId()==null) {
 			categoria.setId(serviceCategorias.obtenerCategorias().size()+1);
@@ -53,23 +53,23 @@ public class CatalogosController {
 	
 	@GetMapping("/eliminar")
 	public String eliminarCa(@RequestParam("id") int idCatalogo, RedirectAttributes model) {
-		serviceCatalogo.eliminar(idCatalogo);
+		serviceCatalogos.eliminar(idCatalogo);
 		model.addFlashAttribute("msg", "Catalogo Eliminada");
 		return "redirect:/catalogos/index";
 	}
 
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Catalogo>catalogos = serviceCatalogo.obtenerCatalogos();
+		List<Catalogo>catalogos = serviceCatalogos.obtenerCatalogos();
 		model.addAttribute("catalogos", catalogos);
 		return "catalogos/listaCatalogos";
 	}
 	
 	@GetMapping(value = "/indexPaginado")
 	public String mostrarIndexPaginado(Model model, Pageable page) {
-	Page<Catalogo> lista = serviceCatalogo.buscarTodas(page);
+	Page<Catalogo> lista = serviceCatalogos.buscarTodas(page);
 	model.addAttribute("catalogos", lista);
-	model.addAttribute("total", serviceCatalogo.obtenerCatalogos().size());
+	model.addAttribute("total", serviceCatalogos.obtenerCatalogos().size());
 	return "catalogos/listaCatalogos";
 	}
 	
