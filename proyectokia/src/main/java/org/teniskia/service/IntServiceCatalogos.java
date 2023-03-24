@@ -12,7 +12,7 @@ public interface IntServiceCatalogos {
 	public void guardar (Catalogo catalogo);
 	public Catalogo buscarPorId (Integer idCatalogo);
 	public void eliminar (Integer idCatalogo);
-	public int numeroCatalogo();
+	public int numeroCatalogos();
 	Page<Catalogo>buscarTodas(Pageable page);
 	
 

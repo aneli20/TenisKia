@@ -12,6 +12,21 @@ import org.teniskia.entity.Catalogo;
 public class CatalogoServiceImp implements IntServiceCatalogos{
 	private List<Catalogo> catalogos = null;
 	
+	public CatalogoServiceImp() {
+		catalogos = new LinkedList<>();
+		
+		Catalogo c1 = new Catalogo();
+		
+		c1.setId(1);
+		c1.setNombre("nike");
+		c1.setDescripcion("tenis de futbol");
+		c1.setPrecio(1050.50);
+		c1.setTalla(2.25);
+		
+		catalogos.add(c1);
+		
+	}
+	
 	
 	@Override
 	public List<Catalogo> obtenerCatalogos(){
@@ -25,9 +40,9 @@ public class CatalogoServiceImp implements IntServiceCatalogos{
 	
 	@Override
 	public Catalogo buscarPorId(Integer idCatalogo) {
-		for(Catalogo cat : catalogos) {
-			if(cat.getId().compareTo(idCatalogo)==0) {
-				return cat;
+		for(Catalogo cata : catalogos) {
+			if(cata.getId().compareTo(idCatalogo)==0) {
+				return cata;
 				
 			}
 		}
@@ -40,7 +55,7 @@ public class CatalogoServiceImp implements IntServiceCatalogos{
 	}
 	
 	@Override
-	public int numeroCatalogo() {
+	public int numeroCatalogos() {
 		return catalogos.size();
 	}
 	

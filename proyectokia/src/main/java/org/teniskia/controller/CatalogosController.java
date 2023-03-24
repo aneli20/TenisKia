@@ -47,12 +47,12 @@ public class CatalogosController {
 		return "redirect:/categorias/index";*/
 	}
 	@GetMapping("/nueva")
-	public String nuevaCat(Catalogo catalogo) {
+	public String nuevaCata(Catalogo catalogo) {
 		return "catalogos/formCatalogo";
 	}
 	
 	@GetMapping("/eliminar")
-	public String eliminarCa(@RequestParam("id") int idCatalogo, RedirectAttributes model) {
+	public String eliminarCata(@RequestParam("id") int idCatalogo, RedirectAttributes model) {
 		serviceCatalogos.eliminar(idCatalogo);
 		model.addFlashAttribute("msg", "Catalogo Eliminada");
 		return "redirect:/catalogos/index";
