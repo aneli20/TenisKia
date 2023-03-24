@@ -40,7 +40,7 @@
           </div>
           <div class="col-md-9">
             <h2 th:text="${catalogo.nombre}"></h2>
-            <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.nombre}"></span></h6>
+            <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.venta.nombre}"></span></h6>
             <p th:text="${catalogo.descripcion}"></p>
             <p><a class="btn btn-secondary" th:href="@{/catalogos/detalle{id=${catalogo.id}}}" role="button">View details &raquo;</a></p>            
           </div>
