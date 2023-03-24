@@ -44,6 +44,7 @@ public class VentaServiceImp implements IntServiceVentas {
 	public Venta buscarPorId(Integer idVenta) {
 	for (Venta ve : ventas) {
 		if(ve.getId()==idVenta) {
+			return ve;
 			
 		}
 	}
