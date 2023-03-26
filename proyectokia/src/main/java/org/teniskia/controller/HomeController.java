@@ -3,6 +3,7 @@ package org.teniskia.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,8 @@ import org.teniskia.entity.Perfil;
 import org.teniskia.entity.Usuario;
 import org.teniskia.service.IntServiceCatalogos;
 import org.teniskia.service.IntServiceUsuarios;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
@@ -53,6 +56,12 @@ public class HomeController {
 	@GetMapping("/login")
 	public String mostrarLogin() {
 		return "formLogin";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+		logoutHandler.logout(request, null, null);
+		return "redirect:/";
 	}
 	
 	
