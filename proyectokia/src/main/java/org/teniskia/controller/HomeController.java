@@ -21,6 +21,11 @@ public class HomeController {
 	@Autowired
 	private IntServiceCatalogos serviceCatalogos;
 	
+	@GetMapping("/")
+	public String mostrarHome() {
+		return "home";
+	}
+	
 	@PostMapping("/guardar")
 	public String guardar(Usuario usuario) {
 		usuario.setFechaRegistro(LocalDate.now());
@@ -45,5 +50,10 @@ public class HomeController {
 		model.addAttribute("catalogos", serviceCatalogos.obtenerCatalogos());
 		return "home";
 	}
+	@GetMapping("/login")
+	public String mostrarLogin() {
+		return "formLogin";
+	}
+	
 	
 }
