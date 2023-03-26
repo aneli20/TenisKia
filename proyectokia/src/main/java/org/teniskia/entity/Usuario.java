@@ -68,6 +68,10 @@ public class Usuario {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", username=" + username
 				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + "]";
 	}
+	public void agregar(Perfil per) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }
