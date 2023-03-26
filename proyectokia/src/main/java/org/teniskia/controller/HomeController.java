@@ -24,10 +24,7 @@ public class HomeController {
 	@Autowired
 	private IntServiceCatalogos serviceCatalogos;
 	
-	@GetMapping("/")
-	public String mostrarHome() {
-		return "home";
-	}
+
 	
 	@PostMapping("/guardar")
 	public String guardar(Usuario usuario) {
