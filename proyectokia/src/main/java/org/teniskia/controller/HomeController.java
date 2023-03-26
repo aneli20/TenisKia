@@ -29,7 +29,7 @@ public class HomeController {
 		Perfil per = new Perfil();
 			per.setId(3);
 			usuario.agregar(per);
-			serviceUsuarios.agregar(usuario);
+			
 		
 		return "home";
 	}
