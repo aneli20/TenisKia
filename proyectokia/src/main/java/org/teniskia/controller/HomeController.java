@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
+	
 	@Autowired
 	private IntServiceUsuarios serviceUsuarios;
 	
