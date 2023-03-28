@@ -58,7 +58,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/login")
-	public String mostrarLogin() {
+	public String mostrarLogin(Usuario usuario) {
 		return "formLogin";
 	}
 	@GetMapping("/logout")
