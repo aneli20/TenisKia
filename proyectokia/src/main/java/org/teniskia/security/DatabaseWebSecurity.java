@@ -17,38 +17,4 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class DatabaseWebSecurity {
 	
-	@Bean
-	UserDetailsManager users(DataSource dataSource) {
-		JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-		return users;
 	}
-	@Bean
-	public UserDetailsManager usersCustom(DataSource dataSource) {
-	JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
-	users.setUsersByUsernameQuery("select username,password,estatus from Usuarios u where username=?");
-	users.setAuthoritiesByUsernameQuery("select u.username,p.perfil from UsuarioPerfil up " +
-	"inner join Usuarios u on u.id = up.idUsuario " +
-	"inner join Perfiles p on p.id = up.idPerfil " +
-	"where u.username=?");
-	return users;
-	}
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	http.authorizeHttpRequests()
-	// Los recursos estáticos no requieren autenticación
-	.requestMatchers("/bootstrap/**","/images/**","/tinymce/**","/logos/**").permitAll()
-	// Las vistas públicas no requieren autenticación
-	.requestMatchers("/", "/signup", "/search", "/vacantes/view/**").permitAll()
-	// Todas las demás URLs de la Aplicación requieren autenticación
-	.anyRequest().authenticated()
-	// El formulario de Login no requiere autenticacion
-	.and().formLogin().permitAll();
-	return http.build();
-	}
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
-
-
-}
