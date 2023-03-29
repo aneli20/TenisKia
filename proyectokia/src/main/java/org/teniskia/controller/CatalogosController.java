@@ -44,7 +44,7 @@ public class CatalogosController {
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
-		List<Catalogo>catalogos = serviceCatalogos.obtenerCatalogos();
+		model.addAttribute("catalogos", serviceCatalogos.obtenerCatalogos());
 		model.addAttribute("total", serviceCatalogos.totalCatalogos());
 		return "catalogos/listaCatalogos";
 	}
