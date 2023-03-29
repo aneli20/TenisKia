@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class DatabaseWebSecurity {
+public class databaseWebSecurity {
 
 	@Bean
 	public UserDetailsManager users(DataSource dataSource) {
