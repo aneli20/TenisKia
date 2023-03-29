@@ -33,7 +33,6 @@ import org.teniskia.util.Utileria;
 
 public class catalogosController {
 	
-	@Value("${railway.ruta.imagenes}")
 	private String ruta;
 	
 	@Autowired
