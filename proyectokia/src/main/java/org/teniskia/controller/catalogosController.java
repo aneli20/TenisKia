@@ -28,10 +28,10 @@ import org.teniskia.service.IntServiceVentas;
 import org.teniskia.util.Utileria;
 
 
-
-@RequestMapping("/catalogos")
 @Controller
-public class CatalogosController {
+@RequestMapping("/catalogos")
+
+public class catalogosController {
 	
 	@Value("${railway.ruta.imagenes}")
 	private String ruta;
