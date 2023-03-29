@@ -1,8 +1,9 @@
 package org.teniskia.controller;
 
-
 import java.util.List;
 
+import org.restaurantevf.entity.Usuario;
+import org.restaurantevf.services.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.teniskia.entity.Usuario;
-import org.teniskia.service.IntServiceUsuarios;
 
 @Controller
 @RequestMapping("/usuarios")
 public class UsuariosController {
 	
-	@Autowired
-	private IntServiceUsuarios serviceUsuarios;
-	
+	// Inyectamos una instancia desde nuestro ApplicationContext
+    @Autowired
+	private UsuariosService serviceUsuarios;
+    
+    /**
+	 * Metodo que muestra la lista de usuarios sin paginacion
+	 * @param model
+	 * @param page
+	 * @return
+	 */
     @GetMapping("/index")
 	public String mostrarIndex(Model model) {
     	List<Usuario> lista = serviceUsuarios.buscarRegistrados();
@@ -39,7 +45,7 @@ public class UsuariosController {
 		// Eliminamos el usuario
     	serviceUsuarios.eliminar(idUsuario);
 			
-		attributes.addFlashAttribute("msg", "El usuario fue eliminado!.");
+		attributes.addFlashAttribute("msg", "El usuario fue eliminado!");
 		return "redirect:/usuarios/index";
 	}
     
@@ -68,5 +74,4 @@ public class UsuariosController {
 		attributes.addFlashAttribute("msg", "El usuario fue bloqueado y no tendra acceso al sistema.");		
 		return "redirect:/usuarios/index";
 	}
-
 }
