@@ -45,7 +45,7 @@ public class CatalogosServiceJpa  implements IntServiceCatalogos{
 		
 	}
 	@Override
-	public int numeroCatalogos() {
+	public int totalCatalogos() {
 		return (int) repoCatalogos.count();
 		
 	}

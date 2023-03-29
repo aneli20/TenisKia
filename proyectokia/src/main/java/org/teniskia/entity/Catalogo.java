@@ -1,13 +1,19 @@
 package org.teniskia.entity;
 
+import java.time.LocalDate;
+
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="catalogos")
+@Table(name="Catalogos")
 public class Catalogo {
 	
 	@Id
@@ -17,6 +23,32 @@ public class Catalogo {
 	private String descripcion;
 	private Double precio;
 	private Double talla;
+	private String imagen = "reach.jpg";
+	private LocalDate fecha = LocalDate.now();
+	
+	@OneToOne
+	@JoinColumn(name="idVenta")
+	private Venta venta;
+	
+	public Venta getVenta() {
+		return venta;
+	}
+	public void setVenta(Venta venta) {
+		this.venta = venta;
+	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public LocalDate getFecha() {
+		return fecha;
+	}
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -50,10 +82,10 @@ public class Catalogo {
 	@Override
 	public String toString() {
 		return "Catalogo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", talla=" + talla + "]";
+				+ ", talla=" + talla + ", imagen=" + imagen + ", fecha=" + fecha + ", venta=" + venta + "]";
 	}
 	
-	
+
 	
 	
 	

@@ -10,9 +10,9 @@ public interface IntServiceCatalogos {
 	
 	public List<Catalogo> obtenerCatalogos();
 	public void guardar (Catalogo catalogo);
+	public void eliminar (Integer id);
 	public Catalogo buscarPorId (Integer idCatalogo);
-	public void eliminar (Integer idCatalogo);
-	public int numeroCatalogos();
+	public int totalCatalogos();
 	Page<Catalogo>buscarTodas(Pageable page);
 	
 

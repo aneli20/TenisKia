@@ -55,7 +55,7 @@ public class CatalogoServiceImp implements IntServiceCatalogos{
 	}
 	
 	@Override
-	public int numeroCatalogos() {
+	public int totalCatalogos() {
 		return catalogos.size();
 	}
 	
