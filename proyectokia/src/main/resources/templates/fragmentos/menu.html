@@ -11,20 +11,18 @@
               <a class="nav-link active" th:href="@{/}">Home</a>
             </li>
             <li class="nav-item">
-              <!--<a class="nav-link" th:href="@{/categorias/index}">Categorias</a>-->
+      <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRADOR')">
               <a class="nav-link" th:href="@{/catalogos/indexPaginado}">catalogos</a>
             </li>
             <li class="nav-item">
-             <!-- <a class="nav-link" th:href="@{/ventas/index}">Vacantes</a>-->
+				<li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
              <a class="nav-link" th:href="@{/ventas/indexPaginado}">ventas</a>
             </li>    
-             <li class="nav-item">
-             <a class="nav-link" th:href="@{/perfiles/index}">Perfiles</a>
-             <!--<a class="nav-link" th:href="@{/vacantes/indexPaginado}">Vacantes</a>-->
+           <li class="nav-item" sec:authorize="hasAnyAuthority('SUPERVISOR','ADMINISTRADOR')">
+             <a class="nav-link" th:href="@{/perfiles/indexPaginado}">Perfiles</a>
             </li>
-             <li class="nav-item">
+           <li class="nav-item" sec:authorize="hasAnyAuthority('ADMINISTRADOR')">
              <a class="nav-link" th:href="@{/usuarios/index}">Usuarios</a>
-             <!--<a class="nav-link" th:href="@{/vacantes/indexPaginado}">Vacantes</a>-->
             </li>     
           </ul>  
           
