@@ -73,11 +73,7 @@ public class HomeController {
 	
 	
 	
-	@GetMapping("/")
-	public String mostrarIndex(Model model) {
-		model.addAttribute("catalogos", serviceCatalogos.obtenerCatalogos());
-		return "home";
-	}
+	
 	
 	@GetMapping("/about")
 	public String mostrarAcerca() {			
