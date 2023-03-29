@@ -39,8 +39,28 @@ public class catalogosController {
 	@Autowired
 	private IntServiceCatalogos serviceCatalogos;
 	
-	@Autowired
-	private IntServiceVentas serviceVentas;
+	@GetMapping("/buscar")
+	public String modificarCa(@RequestParam("id") int idCatalogo, Model model) {
+		Catalogo catalogo = serviceCatalogos.buscarPorId(idCatalogo);
+		model.addAttribute("catalogo", catalogo);
+		return "catalogos/formCatalogo";
+	}
+	
+	@GetMapping("/eliminar")
+	public String eliminarCata(@RequestParam("id") int idCatalogo, RedirectAttributes model) {
+		serviceCatalogos.eliminar(idCatalogo);
+		model.addFlashAttribute("msg", "Catalogo Eliminada");
+		return "redirect:/catalogos/index";
+	}
+	
+	@GetMapping("/detalle")
+	public String detalle(@RequestParam("id") int idCatalogo, Model model) {
+		Catalogo catalogo = serviceCatalogos.buscarPorId(idCatalogo);
+		model.addAttribute("catalogo", catalogo);
+		return "catalogos/detalle";
+	}
+	
+
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
@@ -60,7 +80,6 @@ public class catalogosController {
 	
 	@GetMapping("/nueva")
 	public String nuevaCata(Catalogo catalogo,Model model) {
-		model.addAttribute("ventas", serviceVentas.obtenerVentas());
 		return "catalogos/formCatalogo";
 	}
 	
@@ -70,7 +89,6 @@ public class catalogosController {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
 			}
-			model.addAttribute("ventas", serviceVentas.obtenerVentas());
 			return "catalogos/formCatalogo";
 		}
 		if (!multiPart.isEmpty()) {
@@ -90,29 +108,13 @@ public class catalogosController {
 	}
 	
 	
-	@GetMapping("/buscar")
-	public String modificarCa(@RequestParam("id") int idCatalogo, Model model) {
-		Catalogo catalogo = serviceCatalogos.buscarPorId(idCatalogo);
-		model.addAttribute("ventas", serviceVentas.obtenerVentas());
-		model.addAttribute("catalogo", catalogo);
-		return "catalogos/formCatalogo";
-	}
+	
 
 	
 	
-	@GetMapping("/eliminar")
-	public String eliminarCata(@RequestParam("id") int idCatalogo, RedirectAttributes model) {
-		serviceCatalogos.eliminar(idCatalogo);
-		model.addFlashAttribute("msg", "Catalogo Eliminada");
-		return "redirect:/catalogos/index";
-	}
 	
-	@GetMapping("/detalle")
-	public String detalle(@RequestParam("id") int idCatalogo, Model model) {
-		Catalogo catalogo = serviceCatalogos.buscarPorId(idCatalogo);
-		model.addAttribute("catalogo", catalogo);
-		return "catalogos/detalle";
-	}
+	
+	
 	
 	
 	@InitBinder
