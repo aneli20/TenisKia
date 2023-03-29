@@ -25,6 +25,7 @@ public class Catalogo {
 	private Double talla;
 	private String imagen = "reach.jpg";
 	private LocalDate fecha = LocalDate.now();
+	private String detalles; 
 	
 	@OneToOne
 	@JoinColumn(name="idVenta")
@@ -79,13 +80,26 @@ public class Catalogo {
 	public void setTalla(Double talla) {
 		this.talla = talla;
 	}
+	
+	public void reset() {
+		this.imagen=null;
+	}
+	public String getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
 	@Override
 	public String toString() {
 		return "Catalogo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", talla=" + talla + ", imagen=" + imagen + ", fecha=" + fecha + ", venta=" + venta + "]";
+				+ ", talla=" + talla + ", imagen=" + imagen + ", fecha=" + fecha + ", detalles=" + detalles + ", venta="
+				+ venta + "]";
 	}
 	
-
+	
+	
+	
 	
 	
 	
