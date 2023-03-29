@@ -1,4 +1,4 @@
-package org.teniskia.service;
+package org.teniskia.security;
 
 import javax.sql.DataSource;
 
