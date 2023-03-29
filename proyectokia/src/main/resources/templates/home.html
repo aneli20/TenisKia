@@ -38,19 +38,14 @@
         <hr>
         <div class="row" th:each="catalogo:${catalogos}">
           <div class="col-md-3">            
-            <img class="rounded mx-auto d-block" th:src="@{/logos/{img}{img=${vacante.imagen}}}" alt="Generic placeholder image" width="220" height="220">            
+            <img class="rounded mx-auto d-block" th:src="@{/logos/{img}{img=${catalogo.imagen}}}" alt="Generic placeholder image" width="220" height="220">            
           </div>
           <div class="col-md-9">
             <h2 th:text="${catalogo.nombre}"></h2>
             <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.venta.nombre}"></span></h6>
+             <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(vacante.fecha, 'dd-MM-yyyy')}"></span></h6>
             <p th:text="${catalogo.descripcion}"></p>
             <p><a class="btn btn-secondary" th:href="@{/catalogos/detalle{id=${catalogo.id}}}" role="button">View details &raquo;</a></p>            
-          </div>
-          <div class="col-md-9">
-            <h2 th:text="${venta.nombre}"></h2>
-            <h6 class="card-title"><strong>Ventas: </strong> <span th:text="${venta.nombre}"></span></h6>
-            <p th:text="${venta.descripcion}"></p>
-            <p><a class="btn btn-secondary" th:href="@{/ventas/detalle{id=${venta.id}}}" role="button">View details &raquo;</a></p>            
           </div>
         </div>  
         <div class="container text-center">
@@ -69,8 +64,7 @@
 	  <div class="col">
          <img src="images/puma3.jpg" class="rounded float-end"   alt="...">
          </div>
-    <div class="col">
-        <div class="card text-center">
+          </div>
   <div class="card-header">
     TenisKia
   </div>
@@ -80,7 +74,7 @@
     <a href="#" class="btn btn-primary">Ingresar</a>
   </div>
   <div class="card-footer text-muted">
-    2 days ago
+
   </div>
 </div>
 

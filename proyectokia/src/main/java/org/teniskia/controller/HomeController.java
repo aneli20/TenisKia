@@ -3,6 +3,8 @@ package org.teniskia.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import org.teniskia.service.IntServiceCatalogos;
 import org.teniskia.service.IntServiceUsuarios;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -24,6 +27,29 @@ public class HomeController {
 	
 	@Autowired
 	private IntServiceCatalogos serviceCatalogos;
+	
+	@GetMapping("/")
+	public String mostrarHome() {
+		return "home";
+	}
+	
+	@GetMapping("/index")
+	public String mostrarIndex(Authentication authentication, HttpSession session) {		
+		
+		// Como el usuario ya ingreso, ya podemos agregar a la session el objeto usuario.
+		String username = authentication.getName();		
+		
+		for(GrantedAuthority rol: authentication.getAuthorities()) {
+			System.out.println("ROL: " + rol.getAuthority());
+		}
+		
+		if (session.getAttribute("usuario") == null){
+			Usuario usuario = serviceUsuarios.buscarPorUsername(username);	
+			//System.out.println("Usuario: " + usuario);
+			session.setAttribute("usuario", usuario);
+		}
+		return "redirect:/";
+	}
 	
 
 	
@@ -59,7 +85,7 @@ public class HomeController {
 	}
 	
 	@GetMapping("/index")
-	public String mostrarLogin(Usuario usuario) {
+	public String mostrarLogin() {
 		return "formLogin";
 	}
 	@GetMapping("/logout")
