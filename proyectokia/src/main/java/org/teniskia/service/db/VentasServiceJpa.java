@@ -18,6 +18,7 @@ public class VentasServiceJpa implements IntServiceVentas{
 	
 	@Autowired
 	private VentasRepository repoVentas;
+	
 	@Override
 	public List<Venta> obtenerVentas(){
 		return repoVentas.findAll();
@@ -46,7 +47,7 @@ public class VentasServiceJpa implements IntServiceVentas{
 	}
 	
 	@Override
-	public int numeroVenta() {
+	public int numeroVentas() {
 		return (int) repoVentas.count();
 	}
 	

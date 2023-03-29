@@ -12,7 +12,7 @@ public interface IntServiceVentas {
 	public void guardar (Venta venta);
 	public Venta buscarPorId (Integer idVenta);
 	public void eliminar(Integer idVenta);
-	public int numeroVenta();
+	public int numeroVentas();
 	Page<Venta>buscarTodas(Pageable page);
 
 }

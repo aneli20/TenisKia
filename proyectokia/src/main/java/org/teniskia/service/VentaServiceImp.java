@@ -56,7 +56,7 @@ public class VentaServiceImp implements IntServiceVentas {
 	}
 	
 	@Override
-	public int numeroVenta() {
+	public int numeroVentas() {
 		return ventas.size();
 	}
 	

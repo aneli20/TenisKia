@@ -58,7 +58,7 @@ public class HomeController {
 		return "acerca";
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/index")
 	public String mostrarLogin(Usuario usuario) {
 		return "formLogin";
 	}

@@ -17,9 +17,11 @@ import org.teniskia.service.IntServiceVentas;
 
 @RequestMapping("/ventas")
 @Controller
+
 public class VentasController {
 	@Autowired
 	private IntServiceVentas serviceVentas;
+	
 		@GetMapping("/buscar")
 		public String modificarVen(@RequestParam("id") int idVenta, Model model) {
 			Venta venta = serviceVentas.buscarPorId(idVenta);
