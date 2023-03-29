@@ -30,6 +30,7 @@
       </li>                    
           
           <a class="btn btn-primary" th:href="@{/login}">Ingresar</a>&nbsp;
+          	
               <div sec:authorize="isAnonymous()">
           <a class="btn btn-outline-success" th:href="@{/signup}">Registrarse</a>&nbsp;
           </div>	 
