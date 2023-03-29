@@ -80,7 +80,7 @@ public class HomeController {
 		return "acerca";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/login")
 	public String mostrarLogin() {
 		return "formLogin";
 	}
