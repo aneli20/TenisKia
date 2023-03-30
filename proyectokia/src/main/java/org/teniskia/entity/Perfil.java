@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 public class Perfil {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private Integer id;
 	private String perfil;
 

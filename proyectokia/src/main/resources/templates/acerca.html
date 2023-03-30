@@ -7,7 +7,8 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>TenisKiaApp | Acerca de Empleos App</title>
+        <title>TenisKIA</title>
+
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -17,17 +18,21 @@
 
   <body>
 
-    <header th:insert="fragments/menu :: menu-principal"></header>
+    <header th:insert="~{fragmentos/menu :: menu-principal}"></header>
 
     <main role="main">     
       <hr>
       <div class="container"> 
 
         <div class="card">
-          <h4 class="card-header">Acerca de <strong>Empleos App</strong> </h4>              
+          <h4 class="card-header">Acerca de <strong>TenisKIA</strong> </h4>              
           <div class="card-body">
             
-				<p>Aplicación para Publicar Ofertas de Trabajo desarrollada con Spring Boot.</p1>
+				<p>En TenisKIA, ofrecemos una amplia selección de tenis de alta calidad para todos los gustos y necesidades. 
+					Ya sea que estés buscando un par para correr, entrenamiento o simplemente para lucir bien, tenemos opciones 
+					para ti. Nos enorgullece ofrecer productos de marcas reconocidas y de confianza, con precios competitivos y un 
+					servicio al cliente excepcional. Nuestro objetivo es ayudarte a encontrar el par perfecto que te brinde comodidad y 
+					estilo en cada paso.</p1>
 
           </div>
         </div>
@@ -35,7 +40,7 @@
 
     </main>
 
-    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    <footer th:insert="~{fragmentos/footer :: pie-pagina}" class="footer"></footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

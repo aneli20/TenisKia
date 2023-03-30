@@ -7,7 +7,8 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>EmpleosApp | Formulario de registro</title>
+        <title>TenisKIA</title>
+
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -17,7 +18,7 @@
 
   <body>
 
-    <header th:insert="fragmentos/menu :: menu-principal"></header>
+    <header th:insert="~{fragmentos/menu :: menu-principal}"></header>
 
     <main role="main">     
       <hr>
@@ -54,7 +55,7 @@
                 </div>
               </div>                  
               <hr>
-              <button type="submit" title="Quiero registrarme." class="btn btn-primary">Registrarse</button>  
+              <button type="submit" title="Quiero registrarme." class="btn btn-warning">Registrarse</button>  
             </form>
           </div>
         </div>
@@ -62,7 +63,7 @@
 
     </main>
 
-    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    <footer th:insert="~{fragmentos/footer :: pie-pagina}" class="footer"></footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

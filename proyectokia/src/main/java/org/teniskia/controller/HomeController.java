@@ -1,9 +1,12 @@
 package org.teniskia.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,8 +21,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.teniskia.entity.Catalogo;
 import org.teniskia.entity.Perfil;
 import org.teniskia.entity.Usuario;
+import org.teniskia.service.CatalogosService;
+import org.teniskia.service.CategoriasService;
 import org.teniskia.service.UsuariosService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,6 +34,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private CategoriasService serviceCategorias;
+	
+	// Inyectamos una instancia desde nuestro ApplicationContext
+    @Autowired
+	private CatalogosService serviceCatalogos;
     
     @Autowired
    	private UsuariosService serviceUsuarios;
@@ -35,9 +47,9 @@ public class HomeController {
     @Autowired
     private PasswordEncoder passwordEncoder;
   
-    @GetMapping("/")
+	@GetMapping("/")
 	public String mostrarHome() {
-		return "index";
+		return "home";
 	}
 	
 	/**
@@ -108,6 +120,32 @@ public class HomeController {
 	}
 	
 	/**
+	 * Método para realizar búsquedas desde el formulario de búsqueda del HomePage
+	 * @param vacante
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/search")
+	public String buscar(@ModelAttribute("search") Catalogo catalogo, Model model) {
+		
+		/**
+		 * La busqueda de vacantes desde el formulario debera de ser únicamente en Vacantes con estatus 
+		 * "Aprobada". Entonces forzamos ese filtrado.
+		 */
+		catalogo.setEstatus("Con Existencia");
+		
+		// Personalizamos el tipo de busqueda...
+		ExampleMatcher matcher  = ExampleMatcher.matching().
+			// and descripcion like '%?%'
+			withMatcher("descripcion", ExampleMatcher.GenericPropertyMatchers.contains());
+		
+		Example<Catalogo> example = Example.of(catalogo, matcher);
+		List<Catalogo> lista = serviceCatalogos.buscarByExample(example);
+		model.addAttribute("catalogos", lista);
+		return "home";
+	}
+	
+	/**
 	 * Metodo que muestra la vista de la pagina de Acerca
 	 * @return
 	 */
@@ -148,6 +186,18 @@ public class HomeController {
    		return texto + " Encriptado en Bcrypt: " + passwordEncoder.encode(texto);
    	}
 	
+	/**
+	 * Metodo que agrega al modelo datos genéricos para todo el controlador
+	 * @param model
+	 */
+	@ModelAttribute
+	public void setGenericos(Model model){
+		Catalogo catalogoSearch = new Catalogo();
+		catalogoSearch.reset();
+		model.addAttribute("search", catalogoSearch);
+		model.addAttribute("catalogos", serviceCatalogos.buscarDestacadas());	
+		model.addAttribute("categorias", serviceCategorias.buscarTodas());	
+	}
 	
 	/**
 	 * InitBinder para Strings si los detecta vacios en el Data Binding los settea a NULL
@@ -156,5 +206,6 @@ public class HomeController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-	}
+	}  
+  
 }

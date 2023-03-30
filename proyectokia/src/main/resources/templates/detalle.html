@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+  
 
-    <title>EmpleosApp | Detalles de la Oferta de Trabajo</title>
+        <title>TenisKIA</title>
+
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -17,7 +18,7 @@
 
   <body>
   
-    <header th:insert="fragments/menu :: menu-principal"></header>
+    <header th:insert="~{fragmentos/menu :: menu-principal}"></header>
   
     <main role="main">
       <hr>
@@ -25,27 +26,27 @@
 
         <div class="row">
           <div class="col-md-3">            
-            <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${vacante.imagen}) } " alt="Generic placeholder image" width="220" height="220">            
+            <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${catalogo.imagen}) } " alt="Generic placeholder image" width="220" height="220">            
           </div>
           <div class="col-md-9">
             <div class="card">
-              <h4 class="card-header">Aplicar para <strong th:text="${vacante.nombre}">Ingeniero Civil</strong></h4>              
+              <h4 class="card-header">Detalles del Par <strong th:text="${catalogo.nombre}">Ingeniero Civil</strong></h4>              
               <div class="card-body">
               	<div class="alert alert-danger" role="alert" sec:authorize="isAnonymous()">
 				  ¿Te interesa esta Vacante? <strong>Regístrate</strong> y después ingresa para enviar tu CV.
 				</div>
-                <h5 class="card-title"><strong>Categoría: </strong> <span th:text="${vacante.categoria.nombre}">Nombre la categoría</span></h5>
-                <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(vacante.fecha, 'dd-MM-yyyy')}">2019-01-01</span></h6>
-                <h6 class="card-title"><strong>Salario Ofrecido: $</strong><span th:text="${vacante.salario}">$9000</span></h6>                
-                <p class="card-text" th:text="${vacante.descripcion}">La descripción corta de la oferta de trabajo</p>
+                <h5 class="card-title"><strong>Marca: </strong> <span th:text="${catalogo.categoria.marca}">Nombre la categoría</span></h5>
+                <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(catalogo.fecha, 'dd-MM-yyyy')}">2019-01-01</span></h6>
+                <h6 class="card-title"><strong>Precio: $</strong><span th:text="${catalogo.precio}">$9000</span></h6>                
+                <p class="card-text" th:text="${catalogo.descripcion}">La descripción corta de la oferta de trabajo</p>
                 
                 <div class="card bg-light mb-3" >
                   <div class="card-body">
-                    <h5 class="card-title">Detalles de la oferta de trabajo</h5>
-                    <p class="card-text" th:utext="${vacante.detalles}"></p>
+                    <h5 class="card-title">Caracteristicas del Par</h5>
+                    <p class="card-text" th:utext="${catalogo.detalles}"></p>
                   </div>
                 </div>                   
-                <a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-primary" th:href="@{/solicitudes/create/{id} (id=${vacante.id}) }" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
+                <a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-warning" th:href="@{/reservas/create/{id} (id=${catalogo.id}) }" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Reservar</a>                            
               </div>
             </div>  
           </div>
@@ -54,7 +55,7 @@
       </div>
     </main>
 
-    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    <footer th:insert="~{fragmentos/footer :: pie-pagina}" class="footer"></footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -1,8 +1,6 @@
 package org.teniskia.entity;
 
-import java.time.LocalDate;
-
-
+import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,90 +15,111 @@ import jakarta.persistence.Table;
 public class Catalogo {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private Integer id;
-	private String nombre;
-	private String descripcion;
-	private Double precio;
-	private Double talla;
-	private String imagen = "reach.jpg";
-	private LocalDate fecha = LocalDate.now();
-	private String detalles; 
+	private String nombre; // Nombre de la oferta de trabajo.
+	private String descripcion; // Descripcion corta de la oferta de trabajo
+	private Date fecha; // Fecha de publicacion de la oferta del trabajo.
+	private Double precio; // Salario aproximado que se ofrece por el trabajo.
+	private String estatus; // Valores [Creado, Aprobado, Eliminado].
+	private Integer destacado; // Valores [0, 1]. 0: No se muestra en la pag. principal | 1: Se muestra en la pagina principal.
+	private String imagen="no-image.png"; // Nombre del archivo de la imagen del logotipo de la empresa que ofrece el trabajo.
+	private String detalles; // Detalles de la oferta de trabajo.
 	
 	@OneToOne
-	@JoinColumn(name="idVenta")
-	private Venta venta;
-	
-	public Venta getVenta() {
-		return venta;
-	}
-	public void setVenta(Venta venta) {
-		this.venta = venta;
-	}
-	
-	public String getImagen() {
-		return imagen;
-	}
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-	public LocalDate getFecha() {
-		return fecha;
-	}
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+	@JoinColumn(name = "idCategoria") // foreignKey en la tabla de Vacantes	
+	private Categoria categoria; // Categoria a la que pertence la oferta de trabajo
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getDescripcion() {
-		return descripcion;
+
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
-	public Double getPrecio() {
-		return precio;
+
+	public String getEstatus() {
+		return estatus;
 	}
-	public void setPrecio(Double precio) {
-		this.precio = precio;
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
-	public Double getTalla() {
-		return talla;
+
+	public Integer getDestacado() {
+		return destacado;
 	}
-	public void setTalla(Double talla) {
-		this.talla = talla;
+
+	public void setDestacado(Integer destacado) {
+		this.destacado = destacado;
 	}
-	
-	public void reset() {
-		this.imagen=null;
+
+	public String getImagen() {
+		return imagen;
 	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
 	public String getDetalles() {
 		return detalles;
 	}
+
 	public void setDetalles(String detalles) {
 		this.detalles = detalles;
 	}
-	@Override
-	public String toString() {
-		return "Catalogo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", talla=" + talla + ", imagen=" + imagen + ", fecha=" + fecha + ", detalles=" + detalles + ", venta="
-				+ venta + "]";
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}	
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
-	
-	
-	
-	
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+	public void reset() {
+		this.imagen=null;
+	}
+
+	@Override
+	public String toString() {
+		return "Catalogo [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
+				+ ", precio=" + precio + ", estatus=" + estatus + ", destacado=" + destacado + ", imagen=" + imagen
+				+ ", detalles=" + detalles + ", categoria=" + categoria + "]";
+	}
 	
 	
 

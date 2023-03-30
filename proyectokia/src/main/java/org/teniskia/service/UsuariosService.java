@@ -3,7 +3,7 @@ package org.teniskia.service;
 import java.util.List;
 
 import org.teniskia.entity.Usuario;
-//comentario
+
 public interface UsuariosService {
 	void guardar(Usuario usuario);
 	void eliminar(Integer idUsuario);

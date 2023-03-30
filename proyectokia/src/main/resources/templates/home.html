@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,91 +7,63 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>TenisKiapp | Aplicación para publicar Tenis.</title>
+    <title>TenisKIA</title>
     <!-- Bootstrap core CSS -->
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->    
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
   </head>
 
   <body>
-	  <header th:insert="~{fragmentos/menu.html::menu-principal}"></header>
-	  
+
+	<header th:insert="~{fragmentos/menu :: menu-principal}"></header>
+
     <main role="main">
 
-     <center>
-        <div class=" text-bg-dark p-3">
-          <h1>Encuentra los tenis que mas quieras o que desies </h1>
-      </center>
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h3>Encuentra el par perfecto en TenisKIA</h3>
+          Puedes buscar por descripción y marca.
+          <form th:action="@{/search}" th:object="${search}" method="get" class="form-inline">
+            <input type="text" th:field="*{descripcion}" class="form-control mb-3" placeholder="Escriba una búsqueda">&nbsp;
+            <select th:field="*{categoria.id}" class="custom-select custom-select mb-3">
+              <option th:value="${null}" selected>Seleccione una marca</option>
+              <option th:each="categoria : ${categorias}" 
+					  th:value="${categoria.id}"
+					  th:text="${categoria.marca}">
+			  </option>
+            </select>&nbsp;
+            
+            <button type="submit" class="btn btn-warning mb-3">Buscar</button>            
+          </form>
+        </div>
       </div>
-      </div>
-        <center>
-       <section >
-            <img src="images/logo.jpg" alt="" width="1000px">
-</section>
-  </center>
-  
-      <hr>
-
+            
       <div class="container"> 
-        <hr>
-        <div class="row" th:each="catalogo:${catalogos}">
+        <h2 class="font-weight-bold text-center text-capitalize">PARES DESTACADOS</h2>
+        <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+        <hr>        
+        <div class="row" th:each="catalogo : ${catalogos}">
           <div class="col-md-3">            
-            <img class="rounded mx-auto d-block" th:src="@{/logos/{img}{img=${catalogo.imagen}}}" alt="Generic placeholder image" width="220" height="220">            
+            <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${catalogo.imagen}) }" alt="Generic placeholder image" width="220" height="250">            
           </div>
           <div class="col-md-9">
             <h2 th:text="${catalogo.nombre}"></h2>
-            <h6 class="card-title"><strong>Catalogo: </strong> <span th:text="${catalogo.venta.nombre}"></span></h6>
-             <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(vacante.fecha, 'dd-MM-yyyy')}"></span></h6>
-            <p th:text="${catalogo.descripcion}"></p>
-            <p><a class="btn btn-secondary" th:href="@{/catalogos/detalle{id=${catalogo.id}}}" role="button">View details &raquo;</a></p>            
+            <h6 class="card-title"><strong>Marca: </strong> <span th:text="${catalogo.categoria.marca}"></span></h6>
+            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(catalogo.fecha, 'dd-MM-yyyy')}"></span></h6>
+            <p th:text="${catalogo.descripcion}">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-warning" th:href="@{/catalogos/view/{id} (id=${catalogo.id}) }" role="button">Ver detalles &raquo;</a></p>            
           </div>
-        </div>  
-        <div class="container text-center">
-  <class="row align-items-start">
-    <div class="col">
-        <img src="images/jordan1.jpg" class="rounded float-start" alt="...">
-         </div>
-         <div class="col">
-        <img src="images/adidas3.jpg" class="rounded float-end" alt="...">
-        </div>
-    <div class="col">
-         <img src="images/jordan2.jpg" class="rounded float-end" alt="...">
-         </div>
-           <br>  
-  <div class="row align-items-start">
-   
-	  <div class="col">
-         <img src="images/puma3.jpg" class="rounded float-end"   alt="...">
-         </div>
-         
-          <div class="col">
-        <img src="images/adidas2.jpg" class="rounded float-end" alt="...">
-        </div>
-         <div class="col">
-        <img src="images/adidas1.jpg" class="rounded float-end" alt="...">
-        </div>
-        </div>
-  <div class="card-header">
-    TenisKia
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">hola usuario</h5>
-    <p class="card-text">si quieres ingresar a la pagina oficial da en el boton azul en el de la parte de abajo .</p>
-    <a th:href="@{/login}" class="btn btn-primary">Ingresar</a>
-  </div>
-  <div class="card-footer text-muted">
-
-  </div>
-</div>
-
-
-         <!-- /container -->
+        </div> 
+        <hr>         
+        
+      </div> <!-- /container -->
 
     </main>
     
-    <footer class="footer" th:insert="~{fragmentos/pie.html::pie-pagina}"></footer>
+    <footer th:insert="~{fragmentos/footer :: pie-pagina}" class="footer"></footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

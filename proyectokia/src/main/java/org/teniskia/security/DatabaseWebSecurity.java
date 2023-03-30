@@ -40,7 +40,6 @@ public class DatabaseWebSecurity {
 	// Los recursos estáticos no requieren autenticación
     .requestMatchers(
             "/bootstrap/**",
-            "/css/**", 
             "/images/**",
             "/tinymce/**",
             "/logos/**").permitAll()
@@ -48,22 +47,19 @@ public class DatabaseWebSecurity {
     // Las vistas públicas no requieren autenticación
     .requestMatchers("/", 
     			 "/login",
-    			 "/busquedas",
-    			 "/index", 
     			 "/signup",
-    			 "/search",
     			 "/bcrypt/**",
     			 "/about",
-    			 "/vacantes/view/**").permitAll()
+    			 "/catalogos/view/**").permitAll()
 
 
     // Asignar permisos a URLs por ROLES
-    .requestMatchers("/solicitudes/create/**",
-    			 "/solicitudes/save/**", "/index/**").hasAuthority("USUARIO")
+    .requestMatchers("/reservas/create/**",
+    			 "/reservas/save/**").hasAuthority("USUARIO")
     
-    .requestMatchers("/busquedas/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
-    .requestMatchers("/restaurantes/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
-    .requestMatchers("/paises/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+    .requestMatchers("/reservas/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+    .requestMatchers("/catalogos/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
+    .requestMatchers("/categorias/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
     .requestMatchers("/usuarios/**").hasAnyAuthority("ADMINISTRADOR")
     
     // Todas las demás URLs de la Aplicación requieren autenticación

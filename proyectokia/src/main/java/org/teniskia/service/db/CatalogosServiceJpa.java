@@ -13,36 +13,34 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.teniskia.entity.Catalogo;
 import org.teniskia.repository.CatalogosRepository;
-import org.teniskia.service.IntServiceCatalogos;
+import org.teniskia.service.CatalogosService;
 
 
 
 @Service
 @Primary
-public class CatalogosServiceJpa  implements IntServiceCatalogos{
-	
+public class CatalogosServiceJpa  implements CatalogosService{
 	@Autowired
-	private  CatalogosRepository repoCatalogos;
-	
-	
+	private CatalogosRepository catalogosRepo;
+
 	@Override
 	public void guardar(Catalogo catalogo) {
-		repoCatalogos.save(catalogo);
+		catalogosRepo.save(catalogo);
 	}
 
 	@Override
 	public void eliminar(Integer idCatalogo) {
-		repoCatalogos.deleteById(idCatalogo);
+		catalogosRepo.deleteById(idCatalogo);
 	}
 
 	@Override
 	public List<Catalogo> buscarTodas() {		
-		return repoCatalogos.findAll();
+		return catalogosRepo.findAll();
 	}
 
 	@Override
 	public Catalogo buscarPorId(Integer idCatalogo) {
-		Optional<Catalogo> optional = repoCatalogos.findById(idCatalogo);
+		Optional<Catalogo> optional = catalogosRepo.findById(idCatalogo);
 		if (optional.isPresent()) {
 			return optional.get();
 		}
@@ -51,17 +49,17 @@ public class CatalogosServiceJpa  implements IntServiceCatalogos{
 
 	@Override
 	public List<Catalogo> buscarDestacadas() {
-		return repoCatalogos.findByDestacadoAndEstatusOrderByIdDesc(1, "Aprobada");
+		return catalogosRepo.findByDestacadoAndEstatusOrderByIdDesc(1, "Con Existencia");
 	}
 
 	@Override
 	public Page<Catalogo> buscarTodas(Pageable page) {		
-		return repoCatalogos.findAll(page);
+		return catalogosRepo.findAll(page);
 	}
 
 	@Override
 	public List<Catalogo> buscarByExample(Example<Catalogo> example) {
-		return repoCatalogos.findAll(example);
+		return catalogosRepo.findAll(example);
 	}
 		
 
