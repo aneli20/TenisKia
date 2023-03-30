@@ -21,7 +21,7 @@ import org.teniskia.service.CategoriasService;
 public class CategoriasController {
 	
 	// Inyectamos una instancia desde nuestro ApplicationContext   
-    @Autowired
+	@Autowired
    	private CategoriasService serviceCategorias;
 	  
     /**

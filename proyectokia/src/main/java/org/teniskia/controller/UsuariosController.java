@@ -15,7 +15,6 @@ import org.teniskia.service.UsuariosService;
 @Controller
 @RequestMapping("/usuarios")
 public class UsuariosController {
-	
 	// Inyectamos una instancia desde nuestro ApplicationContext
     @Autowired
 	private UsuariosService serviceUsuarios;
@@ -74,4 +73,5 @@ public class UsuariosController {
 		attributes.addFlashAttribute("msg", "El usuario fue bloqueado y no tendra acceso al sistema.");		
 		return "redirect:/usuarios/index";
 	}
+
 }

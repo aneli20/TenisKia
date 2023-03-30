@@ -169,7 +169,5 @@ public class CatalogosController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
-		
-	
 	
 }
