@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.teniskia</groupId>
-	<artifactId>proyectokia</artifactId>
+	<artifactId>TenisKIA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>proyectokia</name>
 	<description>proyecto</description>
