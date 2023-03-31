@@ -46,7 +46,7 @@
                     <p class="card-text" th:utext="${catalogo.detalles}"></p>
                   </div>
                 </div>                   
-                <a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-warning" th:href="@{/detalle} " role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Comprar</a>                            
+                <a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-warning" th:href="@{/acerca} " role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Comprar</a>                            
               </div>
             </div>  
           </div>
