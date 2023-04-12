@@ -189,10 +189,7 @@ public class CatalogosController {
 		
 		response.setHeader(cabecera, valor);
 		
-	
 		
-        TeniExporterPDF exporter  = new TeniExporterPDF(catalogos);
-		exporter.exportar(response);
 		
 	}
 		
