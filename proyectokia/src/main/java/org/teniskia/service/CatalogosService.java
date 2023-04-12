@@ -15,4 +15,5 @@ public interface CatalogosService {
 	List<Catalogo> buscarDestacadas();
 	Page<Catalogo> buscarTodas(Pageable page);
 	List<Catalogo> buscarByExample(Example<Catalogo> example);
+	List<Catalogo> findAll();
 }

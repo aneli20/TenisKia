@@ -1,5 +1,7 @@
 package org.teniskia.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +28,11 @@ import org.teniskia.entity.Catalogo;
 import org.teniskia.service.CatalogosService;
 import org.teniskia.service.CategoriasService;
 import org.teniskia.util.Utileria;
+import org.teniskia.util.reportes.TeniExporterPDF;
+
+import com.lowagie.text.DocumentException;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value="/catalogos")
@@ -168,6 +175,25 @@ public class CatalogosController {
 	public void initBinder(WebDataBinder webDataBinder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+	
+	@GetMapping("/exportarPDF")
+	public void exportarListadoDeTenisEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Tenis_" + fechaActual + ".pdf";
+		
+		response.setHeader(cabecera, valor);
+		
+		List <Catalogo> catalogos = serviceCatalogos.findAll();
+		
+        TeniExporterPDF exporter  = new TeniExporterPDF(catalogos);
+		exporter.exportar(response);
+		
 	}
 		
 }
