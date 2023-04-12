@@ -189,7 +189,7 @@ public class CatalogosController {
 		
 		response.setHeader(cabecera, valor);
 		
-		List <Catalogo> catalogos = serviceCatalogos.findAll();
+	
 		
         TeniExporterPDF exporter  = new TeniExporterPDF(catalogos);
 		exporter.exportar(response);
