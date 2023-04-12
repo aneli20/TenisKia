@@ -130,7 +130,7 @@ public class ReservasController {
 		attributes.addFlashAttribute("msg", "Gracias por reservar en TenisKIA!");
 			
 		System.out.println("Reserva:" + reserva);
-		return "redirect:/";		
+		return "redirect:/reservas/indexPaginate";		
 	}
 	
 	/**
