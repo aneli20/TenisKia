@@ -42,7 +42,7 @@
                 <tr th:each="reserva : ${reservas.content}">
                   <td th:text="${reserva.catalogo.categoria.marca}">Finanzas</td>
                   <td th:text="${reserva.catalogo.nombre}">Contador Público</td>
-                  <td th:text="${reserva.usuario}">Maria Gómez</td>
+                  <td th:text="${reserva.usuario.nombre}">Maria Gómez</td>
                   <td th:text="${reserva.fecha}">12-01-2019</td>
                   <td>                    
                     <a th:href="@{/reservas/delete/{id} (id=${reserva.id}) }" class="btn btn-warning btn-sm confirmar" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>                    
