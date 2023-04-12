@@ -27,8 +27,8 @@
           <h3>Encuentra el par perfecto en TenisKIA</h3>
           Puedes buscar por descripción y marca.
           <form th:action="@{/search}" th:object="${search}" method="get" class="form-inline">
-            <input type="text" th:field="*{descripcion}" class="form-control mb-3" placeholder="Escriba una búsqueda">&nbsp;
-            <select th:field="*{categoria.id}" class="custom-select custom-select mb-3">
+            <input type="text" class="form-control mb-3" placeholder="Escriba una búsqueda">&nbsp;
+            <select class="custom-select custom-select mb-3">
               <option th:value="${null}" selected>Seleccione una marca</option>
               <option th:each="categoria : ${categorias}" 
 					  th:value="${categoria.id}"

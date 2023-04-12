@@ -55,8 +55,8 @@
                     </div>
                   </div> 
                   <hr>
-                   <a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-warning" th:href="@{/reservas/create/{id} (id=${catalogo.id}) }" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Reservar</a>                            
-
+                   <!--<a sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" class="btn btn-warning" th:href="@{/reservas/save}" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Reservar</a>-->                            
+                   <button sec:authorize="isAuthenticated() and hasAnyAuthority('USUARIO')" type="submit" class="btn btn-warning"><i class="fas fa-file" aria-hidden="true"></i> Reservar</button>
                 </form>
               </div>
             </div> 

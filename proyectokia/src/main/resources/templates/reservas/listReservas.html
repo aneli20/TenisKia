@@ -39,10 +39,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="reserva : ${reservas.content}">
+                <tr th:each="reserva : ${reservas}">
                   <td th:text="${reserva.catalogo.categoria.marca}">Finanzas</td>
                   <td th:text="${reserva.catalogo.nombre}">Contador Público</td>
-                  <td th:text="${reserva.usuario}">Maria Gómez</td>
+                  <td th:text="${reserva.usuario.nombre}">Maria Gómez</td>
                   <td th:text="${reserva.fecha}">12-01-2019</td>
                   <td>                    
                     <a th:href="@{/reservas/delete/{id} (id=${reserva.id}) }" class="btn btn-warning btn-sm confirmar" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>                    
@@ -52,11 +52,25 @@
               </tbody>
             </table>
             <nav th:if="${reservas.totalPages > 0}" aria-label="Page navigation example" >
+				<ul class="pagination justify-content-center">
+					<li class="page-item" th:classappend="${reservas.number == 0 ? 'disabled' : ''}">
+						<a th:href="@{/vacantes/indexPaginate(page=${reservas.number - 1})}" class="page-link">Anterior</a>
+					</li>
+								
+					<li class="page-item" th:classappend="${i eq reservas.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, reservas.totalPages, 1)}">
+						<a class="page-link" th:href="@{/reservas/indexPaginate?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+					</li>
+					<li class="page-item" th:classappend="${reservas.number == (reservas.totalPages - 1) ? 'disabled' : ''}">
+						<a th:href="@{/reservas/indexPaginate(page=${reservas.number + 1})}" class="page-link">Siguiente</a>
+					</li>
+				</ul>
+			</nav>
+            <!--<nav th:if="${reservas.totalPages > 0}" aria-label="Page navigation example" >
 			  <ul class="pagination">         
 			    <li class="page-item"><a th:href="@{/reservas/indexPaginate(page=${reservas.number - 1})}" class="page-link text-warning">Anterior</a></li>			    
 			    <li class="page-item"><a th:href="@{/reservas/indexPaginate(page=${reservas.number + 1})}" class="page-link text-warning">Siguiente</a></li>
 			  </ul>
-			</nav>
+			</nav>-->
           </div>
         </div>
       </div> <!-- /container -->

@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.teniskia.entity.Catalogo;
+import org.teniskia.entity.Categoria;
 import org.teniskia.entity.Reserva;
 import org.teniskia.entity.Usuario;
 import org.teniskia.service.CatalogosService;
@@ -53,10 +51,18 @@ public class ReservasController {
 	 * @param page
 	 * @return
 	 */
-	@GetMapping("/indexPaginate")
+	/*@GetMapping(value = "/indexPaginate")
 	public String mostrarIndexPaginado(Model model, @PageableDefault(sort= {"id"},direction=Sort.Direction.DESC, size=20) Pageable page) {
 		Page<Reserva> lista = reservasService.buscarTodas(page);
 		model.addAttribute("reservas", lista);
+		System.out.println(lista.getContent());
+		return "reservas/listReservas";
+	}*/
+    
+    @GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		model.addAttribute("reservas", reservasService.buscarTodas(page));
+		System.out.println(reservasService.buscarTodas());
 		return "reservas/listReservas";
 	}
 	
@@ -80,6 +86,7 @@ public class ReservasController {
 	 * @param model
 	 * @return
 	 */
+    
 	@GetMapping("/create/{idCatalogo}")
 	public String crear(Reserva reserva, @PathVariable Integer idCatalogo, Model model) {
 		// Traemos los detalles de la Vacante seleccionada para despues mostrarla en la vista
@@ -101,7 +108,7 @@ public class ReservasController {
 	 */
 	@PostMapping("/save")
 	public String guardar(Reserva reserva, BindingResult result, Model model, HttpSession session,
-			@RequestParam("archivoCV") MultipartFile multiPart, RedirectAttributes attributes, Authentication authentication) {	
+			@RequestParam("archivoCV") MultipartFile multiPart, RedirectAttributes attributes, Authentication authentication, Categoria categoria) {	
 		
 		// Recuperamos el username que inicio sesión
 		String username = authentication.getName();
@@ -130,7 +137,7 @@ public class ReservasController {
 		attributes.addFlashAttribute("msg", "Gracias por reservar en TenisKIA!");
 			
 		System.out.println("Reserva:" + reserva);
-		return "redirect:/reservas/indexPaginate";		
+		return "redirect:/";		
 	}
 	
 	/**
